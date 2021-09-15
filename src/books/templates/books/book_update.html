@@ -3,7 +3,7 @@
 {% block title %}Update Book{% endblock title %}
 {% block content %}
 <div class="container mt-5">
-    <h2 class="subhead fs-4 mb-0 text-white text-center">Update Book:</h2>
+    <h2 class="subhead fs-4 mb-0 text-center">Update Book:</h2>
     <form action="" method="POST" class="mt-5">
         {% csrf_token %}
         {{ form.as_p }}
