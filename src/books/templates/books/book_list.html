@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md">
             <div class="card card-body">
-                <h5 class="text-center pt-2">Books</h5>
+                <h5 class="text-center pt-2 display-5">Books</h5>
             </div>
             <div class="card card-body">
                 <table class="table table-hover align-middle">
@@ -32,7 +32,7 @@
                         <td>{{ book.number_of_pages }}</td>
                         <td>{{ book.link_to_cover }}</td>
                         <td>{{ book.language }}</td>
-                        <td><a href="{% url 'books:book-update' book.pk %}">Update</a></td>
+                        <td><a href="{{ book.get_update_url }}">Update</a></td>
                         <td><a href="">Delete</a></td>
                     </tr>
                     {% endfor %}
