@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create Book{% endblock title %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="dsubhead fs-4 mb-0 text-center pb-5">Add Book:</h2>
+    {% if submitted %}
+    <p>Your Book was created.</p>
+    {% else %}
+    <form action="" method="POST" class="text-center">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+    {% endif %}
+</div>
+{% endblock content %}

@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class Book(models.Model):
 
-    name = models.CharField(max_length=120)
+    title = models.CharField(max_length=120)
     author = models.CharField(max_length=120)
     date_published = models.DateField()
     isbn_number = models.CharField(max_length=120)
@@ -13,7 +13,7 @@ class Book(models.Model):
     language = models.CharField(max_length=120)
 
     def __str__(self):
-        return f"{self.name} - {self.author}"
+        return f"{self.title} - {self.author}"
 
     def get_absolute_url(self):
 

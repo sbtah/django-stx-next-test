@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Books{% endblock title %}
 {% block content %}
+{% include 'search_book.html' %}
 <div class="container mt-5">
     <div class="row">
         <div class="col-md">
@@ -8,25 +9,31 @@
                 <h5 class="text-center pt-2">Books</h5>
             </div>
             <div class="card card-body">
-                <table class="table">
-                    <tr>
-                        <th>Name</th>
-                        <th>Author</th>
-                        <th>Date Published</th>
-                        <th>ISBN Number</th>
-                        <th>Number of Pages</th>
-                        <th>Link to Cover</th>
-                        <th>Language</th>
-                    </tr>
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Date Published</th>
+                            <th>ISBN Number</th>
+                            <th>Number of Pages</th>
+                            <th>Link to Cover</th>
+                            <th>Language</th>
+                            <th>Edit</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
                     {% for book in books %}
                     <tr>
-                        <td>{{ book.name }}</td>
+                        <td>{{ book.title }}</td>
                         <td>{{ book.author }}</td>
                         <td>{{ book.date_published }}</td>
                         <td>{{ book.isbn_number }}</td>
                         <td>{{ book.number_of_pages }}</td>
                         <td>{{ book.link_to_cover }}</td>
                         <td>{{ book.language }}</td>
+                        <td><a href="{% url 'books:book-update' book.pk %}">Update</a></td>
+                        <td><a href="">Delete</a></td>
                     </tr>
                     {% endfor %}
                 </table>
