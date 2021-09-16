@@ -118,3 +118,12 @@ def book_update(request, pk):
     }
 
     return render(request, 'books/book_update.html', context)
+
+
+# Delete a book.
+def book_delete(request, pk):
+
+    book = Book.objects.get(pk=pk)
+    book.delete()
+
+    return redirect('books: book-list')

@@ -31,3 +31,10 @@ class Book(models.Model):
         return reverse('books:book-update', kwargs={
             'pk': self.pk,
         })
+
+    # This redirects delete function.
+    def get_delete_url(self):
+
+        return reverse('books:book-delete', kwargs={
+            'pk': self.pk,
+        })
