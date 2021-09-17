@@ -134,6 +134,10 @@ def book_delete(request, pk):
     return redirect('books: book-list')
 
 
+#  Dunno how to progress this further.
+#  What I need is  a function that will parse through a google Books api,
+#  and instanciate selected books as a models in db.
+
 def api_get(request):
     question = 'harry potter'
     api_url = "https://www.googleapis.com/books/v1/volumes?q=Hobbit"
