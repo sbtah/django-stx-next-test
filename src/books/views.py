@@ -1,8 +1,13 @@
+
+import requests
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Book
 from .forms import BookForm
+
+
+API_KEY = 'AIzaSyBd3UStCx_0imS5cZTOAh16TwoRJOaRNO8'
 
 
 # Checks if query is valid.
@@ -127,3 +132,15 @@ def book_delete(request, pk):
     book.delete()
 
     return redirect('books: book-list')
+
+
+def api_get(request):
+    question = 'harry potter'
+    api_url = "https://www.googleapis.com/books/v1/volumes?q=Hobbit"
+    key = 'AIzaSyBd3UStCx_0imS5cZTOAh16TwoRJOaRNO8'
+
+    response = requests.get(api_url).json()
+
+    return render(request, 'books/api_list.html', {
+        'response': response,
+    })

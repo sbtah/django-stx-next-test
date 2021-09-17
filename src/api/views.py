@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializer import BookSerializer
+from .serializers import BookSerializer
 from books.models import Book
 
 
