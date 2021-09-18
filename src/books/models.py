@@ -9,7 +9,7 @@ class Book(models.Model):
 
     title = models.CharField(max_length=120)
     author = models.CharField(max_length=120)
-    date_published = models.DateField()
+    date_published = models.DateField(blank=True, null=True)
     isbn_number = models.CharField(max_length=120)
     number_of_pages = models.PositiveIntegerField()
     link_to_cover = models.URLField()

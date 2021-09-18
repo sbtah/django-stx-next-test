@@ -14,7 +14,7 @@ class BookForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
             'author': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}),
-            'date_published': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'YYYY-MM-DD'}),
+            'date_published': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'YYYY-MM-DD', 'format': '%Y%m%d'}),
             'isbn_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ISBN Number'}),
             'number_of_pages': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Number of Pages'}),
             'link_to_cover': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'http://www.example.com'}),
@@ -31,3 +31,23 @@ class BookForm(forms.ModelForm):
             'language': 'Language',
 
         }
+
+
+# class SearchBook(forms.Form):
+
+#     keyword = forms.CharField(label='keyword', max_length=100)
+
+
+class SearchBook(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['keyword'].widget.attrs.update(
+            {'class': 'form-control'})
+
+    keyword = forms.CharField(label='keyword', max_length=100)
+
+    class Meta:
+
+        model = Book
+        fields = ["keyword"]

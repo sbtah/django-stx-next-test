@@ -1,11 +1,13 @@
 
 import requests
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .models import Book
-from .forms import BookForm
-
+from .forms import BookForm, SearchBook
+from django.views.generic import View, FormView
+import datetime
 
 API_KEY = 'AIzaSyBd3UStCx_0imS5cZTOAh16TwoRJOaRNO8'
 
@@ -138,13 +140,43 @@ def book_delete(request, pk):
 #  What I need is  a function that will parse through a google Books api,
 #  and instanciate selected books as a models in db.
 
-def api_get(request):
-    question = 'harry potter'
-    api_url = "https://www.googleapis.com/books/v1/volumes?q=Hobbit"
-    key = 'AIzaSyBd3UStCx_0imS5cZTOAh16TwoRJOaRNO8'
 
-    response = requests.get(api_url).json()
+class GoogleBooks(FormView):
 
-    return render(request, 'books/api_list.html', {
-        'response': response,
-    })
+    model = Book
+    form_class = SearchBook
+    template_name = "books/api_list.html"
+    success_url = reverse_lazy("books:book-search")
+
+    def book_search(self, value):
+        param = {"q": value}
+        api_url = "https://www.googleapis.com/books/v1/volumes"
+        response = requests.get(url=api_url, params=param)
+        books = response.json()["items"]
+
+        # for item in items:
+        #     print(item["volumeInfo"]["title"])
+
+        return books
+
+    def add_book_to_library(self, items):
+        for book in items:
+            Book.objects.create(
+                title=book['volumeInfo']['title'],
+                author=str(book['volumeInfo']['authors'][:]),
+                date_published=str(book['volumeInfo']['publishedDate']),
+                isbn_number=book['volumeInfo']['industryIdentifiers'],
+                number_of_pages=int(book['volumeInfo']['pageCount']),
+                link_to_cover=book['volumeInfo']['canonicalVolumeLink'],
+                language=book['volumeInfo']['language'],
+            )
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(self.request.POST)
+        if form.is_valid():
+            keyword = form.cleaned_data['keyword']
+            books = self.book_search(keyword)
+            self.add_book_to_library(books)
+            return HttpResponseRedirect(reverse_lazy('books:book-list'))
+
+        return reverse_lazy("books:book-search")

@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for r in response %}
-{{ r }}
-{% endfor %}
-{% endblock content %}
+<div class="container mt-5">
+    <h2 class="dsubhead fs-4 mb-0 text-center pb-5">Search for Book:</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button>Submit</button>
+    </form>
+</div>
+{{ book_search }}
+{% endblock %}
