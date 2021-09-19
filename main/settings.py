@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = str(os.environ.get('DEBUG'))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mybooksmanager.herokuapp.com']
 
 if not DEBUG:
     ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOSTS')]
