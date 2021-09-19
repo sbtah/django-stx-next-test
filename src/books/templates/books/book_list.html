@@ -2,43 +2,43 @@
 {% block title %}Books{% endblock title %}
 {% block content %}
 {% include 'search_book.html' %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md">
-            <div class="card card-body">
-                <h5 class="text-center pt-2 display-5">Books</h5>
-            </div>
-            <div class="card card-body">
-                <table class="table table-hover align-middle">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Date Published</th>
-                            <th>ISBN Number</th>
-                            <th>Number of Pages</th>
-                            <th>Link to Cover</th>
-                            <th>Language</th>
-                            <th>Edit</th>
-                            <th>Remove</th>
-                        </tr>
-                    </thead>
-                    {% for book in books %}
+
+<div class="row mt-5">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5 class="text-center pt-2 display-5">Books</h5>
+        </div>
+        <div class="card card-body">
+            <table class="table table-hover align-middle">
+                <thead>
                     <tr>
-                        <td>{{ book.title }}</td>
-                        <td>{{ book.author }}</td>
-                        <td>{{ book.date_published }}</td>
-                        <td>{{ book.isbn_number }}</td>
-                        <td>{{ book.number_of_pages }}</td>
-                        <td>{{ book.link_to_cover }}</td>
-                        <td>{{ book.language }}</td>
-                        <td><a href="{{ book.get_update_url }}">Update</a></td>
-                        <td><a href="{{ book.get_delete_url }}">Delete</a></td>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Date Published</th>
+                        <th>ISBN Number</th>
+                        <th>Number of Pages</th>
+                        <th>Link to Cover</th>
+                        <th>Language</th>
+                        <th>Edit</th>
+                        <th>Remove</th>
                     </tr>
-                    {% endfor %}
-                </table>
-            </div>
+                </thead>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.date_published }}</td>
+                    <td>{{ book.isbn_number }}</td>
+                    <td>{{ book.number_of_pages }}</td>
+                    <td>{{ book.link_to_cover }}</td>
+                    <td>{{ book.language }}</td>
+                    <td><a href="{{ book.get_update_url }}">Update</a></td>
+                    <td><a href="{{ book.get_delete_url }}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 </div>
+
 {% endblock content %}
