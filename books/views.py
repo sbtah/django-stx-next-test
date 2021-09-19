@@ -131,7 +131,7 @@ def book_delete(request, pk):
     book = Book.objects.get(pk=pk)
     book.delete()
 
-    return redirect('books: book-list')
+    return redirect('books:book-list')
 
 
 #  Dunno how to progress this further.
