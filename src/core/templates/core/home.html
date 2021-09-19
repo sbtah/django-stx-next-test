@@ -4,44 +4,52 @@
 <div class="bg-dark text-secondary px-4 py-5 text-center">
     <div class="py-5">
         <h1 class="display-5 fw-bold text-white">Book Library App</h1>
-        <h3 class="display-5 fw-bold text-white">Current number of books: {{ all_books }}</h3>
+        <h3 class="display-5 fw-bold text-primary ">Current number of books: {{ all_books }}</h3>
         <div class="col-lg-6 mx-auto mt-4">
             <p class="fs-5 mb-4 text-white">Hello there,
 
-                This is an app I had to make as part of recrutation test.
+                This is an app I had to make as part of recruitment test.
                 So... I will be honest, this project is bad, I mean really bad.
 
                 I will explain why.
                 First of all, description:
                 While using any python web framework I had to make an app that will manage a collection of books.
-                This app should allow it's users to manually add, edit and delete Books. A simple CRUD.
-                Also app should have a functionality that would allow to import Books from Google Api.
-                Frontend could finished with Bootstrap.</p>
-            <br>
-            <h5 class="display-6 fw-bold text-white">Part 1:</h5>
+                This app should allow it's users to manually add, edit and delete Books. A CRUD architecture.
+                Also, this app should have a functionality that would allow import of Books from Google Api.
+                Frontend could be made with Bootstrap.</p>
+            <br class="btn-primary">
+            <h5 class="display-6 fw-bold text-primary">Part 1:</h5>
             <p class="fs-5 mb-4 text-white">
-                1) So this went pretty smooth. I done all the models. At the begining Book model had (in my opinion)
-                properly chosen fields. Later I changed them to CharFields, bacause of this Api thing ;)</p>
+                1) So this went pretty smooth. I done all the models. At the beginning Book model had (in my opinion)
+                properly chosen fields. Later I changed them to CharFields, because of this Api thing ;)</p>
             <p class="fs-5 mb-4 text-white">
                 2) I had to create 2 views: a view that will allow user to edit a Book - Done. A 2nd View that would
-                list all the books and allow to search and filter them, by information in model. Form and realated view
-                are working, but Im quite sure this could be done better.</p>
+                list all the books and allow to search and filter them, by information in model. Form and related views
+                are working, but I&#39;m quite sure this could be done better.</p>
 
-            <h5 class="display-6 fw-bold text-white">Part 2:</h5>
+            <h5 class="display-6 fw-bold text-primary">Part 2:</h5>
             <p class="fs-5 mb-4 text-white">
                 1) This was the hardest part for me. First of all, this was my first contact with Apis. The outcome of
-                this, is this frankenstein code (GoogleBooks) in related view. I still dont understand it, and the view
+                this, is this Frankenstein code (in GoogleBooks) in related view. I still don&#39;t understand it, and
+                the
+                view
                 I wrote is crashing and is buggy. I had a chance to learn a lot while doing this tho. Some requests
                 library, serializers , deserialize, generating api views, a little bit of postman, json, and more... I
-                tried like 3 different aproaches, function views, class views and django rest framework...
-                The overall effect is bad :(</p>
-            <h5 class="display-6 fw-bold text-white">Part 3:</h5>
+                tried like 3 different approaches, function views, class views and Django Rest Framework...and at the
+                end I used dictionary in function view to get the data from API, bacause it allowed me to specify a None
+                value if the
+                data was missing.
+                The overall effect is bad, I mean really bad... :(</p>
+            <h5 class="display-6 fw-bold text-primary">Part 3:</h5>
             <p class="fs-5 mb-4 text-white">1) This Part was basically done for me by django rest framework. I would
-                like to mention that this was my 1st contact with DRF. It works only because of DRF's documentation and
+                like to mention that this was my 1st contact with DRF. It works only because of DRF&#39;s documentation
+                and
                 some YT tutorial.</p>
-            <h5 class="display-6 fw-bold text-white">Part 4:</h5>
-            <p class="fs-5 mb-4 text-white">1) To Do...</p>
-            <h5 class="display-6 fw-bold text-white">Part 5:</h5>
+            <h5 class="display-6 fw-bold text-primary">Part 4:</h5>
+            <p class="fs-5 mb-4 text-white">1) So I had to learn about securing sensitive data, like security keys or
+                api keys. I
+                used django-dotenv package for that. This part was actually </p>
+            <h5 class="display-6 fw-bold text-primary">Part 5:</h5>
             <p class="fs-5 mb-4 text-white">1) To Do...</p>
         </div>
     </div>
