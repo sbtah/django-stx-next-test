@@ -28,8 +28,8 @@ DEBUG = str(os.environ.get('DEBUG'))
 
 ALLOWED_HOSTS = ['mybooksmanager.herokuapp.com']
 
-if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOSTS')]
+# if not DEBUG:
+#     ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOSTS')]
 
 
 # Application definition
