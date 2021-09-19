@@ -7,13 +7,13 @@ class Book(models.Model):
     A model for Book.
     """
 
-    title = models.CharField(max_length=120)
-    author = models.CharField(max_length=120)
-    date_published = models.DateField(blank=True, null=True)
-    isbn_number = models.CharField(max_length=120)
-    number_of_pages = models.PositiveIntegerField()
-    link_to_cover = models.URLField()
-    language = models.CharField(max_length=120)
+    title = models.CharField(max_length=120, blank=True, null=True)
+    author = models.CharField(max_length=120, blank=True, null=True)
+    date_published = models.CharField(max_length=12, blank=True, null=True)
+    isbn_number = models.CharField(max_length=120, blank=True, null=True)
+    number_of_pages = models.PositiveIntegerField(blank=True, null=True)
+    link_to_cover = models.URLField(blank=True, null=True)
+    language = models.CharField(max_length=120, blank=True, null=True)
 
     def __str__(self):
         return f"{self.title} - {self.author}"

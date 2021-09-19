@@ -9,8 +9,6 @@ from .forms import BookForm, SearchBook
 from django.views.generic import View, FormView
 import datetime
 
-API_KEY = 'AIzaSyBd3UStCx_0imS5cZTOAh16TwoRJOaRNO8'
-
 
 # Checks if query is valid.
 def is_valid_query(param):
@@ -137,15 +135,13 @@ def book_delete(request, pk):
 
 
 #  Dunno how to progress this further.
-#  What I need is  a function that will parse through a google Books api,
+#  What I need is  a function or view that will parse through a google Books api,
 #  and instanciate selected books as a models in db.
-
-
 class GoogleBooks(FormView):
 
     model = Book
     form_class = SearchBook
-    template_name = "books/api_list.html"
+    template_name = "books/google_search.html"
     success_url = reverse_lazy("books:book-search")
 
     def book_search(self, value):
@@ -154,22 +150,45 @@ class GoogleBooks(FormView):
         response = requests.get(url=api_url, params=param)
         books = response.json()["items"]
 
-        # for item in items:
-        #     print(item["volumeInfo"]["title"])
+        # for item in books:
+        #     print(item['volumeInfo']['publishedDate'][:4])
 
         return books
 
     def add_book_to_library(self, items):
-        for book in items:
-            Book.objects.create(
-                title=book['volumeInfo']['title'],
-                author=str(book['volumeInfo']['authors'][:]),
-                date_published=str(book['volumeInfo']['publishedDate']),
-                isbn_number=book['volumeInfo']['industryIdentifiers'],
-                number_of_pages=int(book['volumeInfo']['pageCount']),
-                link_to_cover=book['volumeInfo']['canonicalVolumeLink'],
-                language=book['volumeInfo']['language'],
-            )
+
+        try:
+            # just in case the server doesn't return valid JSON
+            for result in items:
+                if "volumeInfo" not in result:  # invalid entry - missing volumeInfo
+                    continue
+
+                result_dict = {}  # a dictionary to store our discovered fields
+                # all the data we're interested is in volumeInfo.
+                result = result["volumeInfo"]
+
+                result_dict["title"] = result.get("title", None)
+                result_dict["author"] = result.get("authors", None)
+                result_dict["published_date"] = result.get(
+                    "publishedDate", None)
+                result_dict["isbn"] = result.get("industryIdentifiers", None)
+                result_dict["pages"] = result.get("pageCount", None)
+                result_dict["image_link"] = result.get(
+                    "imageLinks", {}).get("thumbnail", None)
+                result_dict["language"] = result.get("language", None)
+
+                Book.objects.create(
+                    title=str(result_dict["title"]),
+                    author=str(result_dict["author"]),
+                    date_published=str(result_dict["published_date"]),
+                    isbn_number=str(result_dict["isbn"]),
+                    number_of_pages=str(result_dict["pages"]),
+                    link_to_cover=str(result_dict["image_link"]),
+                    language=str(result_dict["language"]),
+                )
+        # There is an error here, in some value or maybe I'm bad at unpacking this.... :(
+        except ValueError:
+            print("error")
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(self.request.POST)

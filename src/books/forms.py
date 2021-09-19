@@ -33,21 +33,19 @@ class BookForm(forms.ModelForm):
         }
 
 
-# class SearchBook(forms.Form):
-
-#     keyword = forms.CharField(label='keyword', max_length=100)
-
-
 class SearchBook(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['keyword'].widget.attrs.update(
-            {'class': 'form-control'})
+            {'class': 'form-control', })
 
-    keyword = forms.CharField(label='keyword', max_length=100)
+    keyword = forms.CharField(max_length=100)
 
     class Meta:
 
         model = Book
         fields = ["keyword"]
+        labels = {
+            'keyword': '',
+        }
